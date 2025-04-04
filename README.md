@@ -11,11 +11,21 @@ After a TON of googling, my first steps were to install the tftp server that wil
 
 <code>sudo apt install tftpd-hpa putty</code>
 
-You will need to adjust the settings of the tftp server to fit our needs using your editor of choice.
+Next you will need to download a couple files from the openwrt website. You will need the .itb file for booting from ram at:
+
+<link>https://downloads.openwrt.org/snapshots/targets/qualcommax/ipq50xx/openwrt-qualcommax-ipq50xx-linksys_mx2000-initramfs-uImage.itb</link>
+You will also need the .bin file that you want to use. I will put both the files I used on this repository. Luci is installed on the bin file here and they have been renamed for shorter typing.
+
+The default path to files shared by tftpd-hpa is "/srv/tftp/". You will have to use sudo to copy the .itb file to "/srv/tftp"
+If you don't want to use the default path for your firmware file you will need to change the settings of the tftp server to fit your needs using your editor of choice.
 
 <code>sudo nano /etc/default/tftpd-hpa</code>
 
 or
 
 <code>sudo vi /etc/default/tftpd-hpa</code>
+
+Change TFTP_DIRECTORY= to the directory you want to use and restart the tftpd-hpa service with:
+
+<code>sudo systemctl restart tftpd-hpa.service</code>
 
