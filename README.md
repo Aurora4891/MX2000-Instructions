@@ -32,4 +32,27 @@ Change TFTP_DIRECTORY= to the directory you want to use and restart the tftpd-hp
 
 <code>sudo systemctl restart tftpd-hpa.service</code>
 
+Now you need to hook up the USB to TTL adapter so you need to open your router. Quoting georgem83...
+
+<i>
+To open them, remove the rubber bands from the bottom to reveal the screws. Open them, then use a long thin non-sharp tool and push the top cover from the bottom from one of the corners with ample space. Remove the screws that connect the PCB/cooling elements from the casing and you can slide the cover off.
+</i>
+
+Then hook the adapter to the serial pins on the router. GND to GND, RX to TX and TX to RX. Again quoting georgem83, the pinout on the router is...
+
+<i>
+Pinout: GND -empty- RX - TX -empty (starting from GND label)
+</i>
+
+In order to have to router get the .itb file you will need to use an ethernet cable and connect your computer to the 1st LAN port on the router. You also need to set the IP address of your computer to 192.168.1.254 and the subnet mask to 255.255.255.0 .
+
+Next, plugin your USB to TTL adapter to your computer and open Putty. Select serial and in the Serial Line box type the path to your adapter. If your get the one I got, it will probably be "/dev/ttyUSB0". Next for speed type "115200". Now click the open button. I don't know if it matters, but while I was working with the router I turned off the Wifi on my laptop as to not cause unforseen problems.
+
+Your now ready to turn on your router. You should now see a wall of text scroll past on the serial console and at some point, 
+if your router fails to boot it will drop you back to a Uboot prompt. To load the .itb file and boot from RAM type:
+
+<code>tftp $loadaddr openwrt-qualcommax-ipq50xx-linksys_mx2000-initramfs-uImage.itb && bootm $loadaddr</code>
+
+
+
 scp -O /your/path/to/file.bin root@192.168.1.1:/tmp/firmware.bin
