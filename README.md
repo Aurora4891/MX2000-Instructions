@@ -49,6 +49,27 @@ if your router fails to boot it will drop you back to a Uboot prompt. To load th
 
 <code>tftp $loadaddr name-of-your-file.itb && bootm $loadaddr</code>
 
+After some time to boot up, you will be running Openwrt from RAM. DON'T turn off your router before you flash or you will have to run the above code again. You can now SSH into your router from a terminal window on your computer with:
 
+<code>ssh root@192.168.1.1</code>
 
-scp -O /your/path/to/file.bin root@192.168.1.1:/tmp/firmware.bin
+You will get a prompt about unknown connection, just type "yes" and hit ENTER.
+Next you will have to send your firmware file to the router using SCP. Open another terminal window on your computer and run:
+
+<code>scp -O /your/path/to/file.bin root@192.168.1.1:/tmp/firmware.bin</code>
+
+Don't forget to change "/your/path/to/file.bin" to the actual path to your bin file. Now with your firmware file on the router you can flash your router. First you need to find your boot partition. To find the number of the current boot partition type:
+
+<code>fw_printenv -n boot_part</code>
+
+If you get "1" back, you need to install the firmware on the second partition using the command:
+
+<code>mtd -r -e alt_kernel -n write /tmp/firmware.bin alt_kernel</code>
+
+and in case of getting "2" back, run:
+
+<code>mtd -r -e kernel -n write /tmp/firmware.bin kernel</code>
+
+After it's done flashing, your router should reboot. If it still doesn't boot all the way you can power cycle the router a couple times until it boots to the good partition. You will have to leave it plugged in for a few seconds before you unplug it again to cycle the power. Once it boots you can follow the same steps above starting at SSH into root to flash the other partition.
+
+As a quick note about my firmware file
