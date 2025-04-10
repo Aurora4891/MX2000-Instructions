@@ -72,7 +72,7 @@ and in case of getting "2" back, run:
 
 After it's done flashing, your router should reboot. If it still doesn't boot all the way you can power cycle the router a couple times until it boots to the good partition. You will have to leave it plugged in for a few seconds before you unplug it again to cycle the power. Once it boots you can follow the same steps above starting at SSH into root to flash the other partition.
 
-As a quick note about my firmware file, I wanted Luci on my routers, but with the current images for our routers being snapshots they didn't come with Luci. Also I was setting them up without an internet connection so I couldn't use apk to install Luci. I used the Firmware Selector to make the bin file I used. The problem with it is that for some reason after a flashed it and went to run "fw_printenv -n boot_part" it came back with an error and not the boot partition number.
+As a quick note about my firmware file, I wanted Luci on my routers, but with the current images for our routers being snapshots they didn't come with Luci. Also I was setting them up without an internet connection so I couldn't use apk to install Luci. I used the Firmware Selector to make the bin file I used. The problem with it is that for some reason after I flashed it and went to run "fw_printenv -n boot_part" it came back with an error and not the boot partition number.
 
 TLDR if "fw_printenv -n boot_part" throws an error, you can run this to fix it:
 
