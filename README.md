@@ -1,5 +1,5 @@
 # MX2000-Instructions
-My steps in debricking a bad Openwrt flash on a Linksys MX2000 using tftp on Debian.
+My steps in debricking a bad Openwrt flash on a Linksys MX2000 using tftp on Debian (LMDE6).
 
 Disclaimer: I am by no way an expert at debricking routers, using serial adapters or anything else in this writeup.
 If you follow my steps and completely destroy your router I am NOT responsible for your actions.
